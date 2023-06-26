@@ -1,6 +1,21 @@
-ARG RELEASE
-ARG LAUNCHPAD_BUILD_ARCH
-LABEL org.opencontainers.image.ref.name=ubuntu
-LABEL org.opencontainers.image.version=18.04
-ADD file:3c74e7e08cbf9a87694ce6fa541af617599680fa54d9e48556fc0fbc120b4a83 in /
-CMD ["/bin/bash"]
+FROM ubuntu:18.04
+
+# Set env
+ENV PYTHON_ROOT_PATH /usr/local/python-3.7.5
+ENV PATH /usr/local/bin:/root/.local/bin:$PATH
+
+# Install base tools
+RUN apt update \
+    && DEBIAN_FRONTEND=noninteractive apt install -y \
+    vim \
+    wget \
+    curl \
+    xz-utils \
+    net-tools \
+    openssh-client \
+    git \
+    ntpdate \
+    tzdata \
+    tcl \
+    sudo \
+    bash-completion
